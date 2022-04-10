@@ -1,2 +1,2 @@
-# proverbs-twitter-bot
-Simple English Proverbs Twitter Bot
+# English Proverbs Twitter Bot
+Simple English Proverbs Twitter Bot that twitts new proverb daily
