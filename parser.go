@@ -36,5 +36,6 @@ func (tp TweetParser) parse(file io.Reader) tweet {
 
 	// return a random tweet from the list
 	rand.Seed(time.Now().UnixNano())
-	return tweet(tweets[rand.Intn(len(tweets) -1)])
+	val := rand.Intn(len(tweets) -1)
+	return tweet(tweets[val])
 }

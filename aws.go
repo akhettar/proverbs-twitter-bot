@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"os"
 
@@ -20,7 +19,7 @@ type S3Client struct {
 func (sc3 *S3Client) download(bucket,filename string) (*os.File, error) {
 
 	// 1. Create temporary file where to downlaod the tweets to
-	file, err := os.Create("tempFile")
+	file, err := os.Create("/tmp/tempFile")
 
 	if err != nil {
 		log.Fatal(err)
@@ -36,7 +35,7 @@ func (sc3 *S3Client) download(bucket,filename string) (*os.File, error) {
 	n, err := sc3.Download(file, input)
 
 	if err != nil {
-		return 0, fmt.Errorf("failed to download file, %v", err)
+		return nil, fmt.Errorf("failed to download file, %v", err)
 	}
 	fmt.Printf("file downloaded, %d bytes\n", n)
 	return file, nil
@@ -44,5 +43,5 @@ func (sc3 *S3Client) download(bucket,filename string) (*os.File, error) {
 
 // NewS3Client ...
 func NewS3Client() *S3Client {
-	return &S3Client{s3manager.NewDownloader(session.Must(session.NewSession()))}
+	return &S3Client{s3manager.NewDownloader(session.Must(session.NewSession(aws.NewConfig().WithRegion("eu-central-1"))))}
 }
