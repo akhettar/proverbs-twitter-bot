@@ -1,5 +1,6 @@
 provider "aws" {
-    profile =                 "${var.profile}"
+  profile             = var.profile
+  allowed_account_ids = [var.allowed_account_id]
 }
 
 
@@ -21,8 +22,8 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 module "s3_bucket" {
-    source = "./s3"
-    bucket_name = "eng-proverbs-cirta"       
+  source      = "./s3"
+  bucket_name = "eng-proverbs-cirta"
 }
 
 module "twitter-bot" {
