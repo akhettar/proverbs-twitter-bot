@@ -29,3 +29,8 @@ variable "tags" {
     env         = "Test"
   }
 }
+
+variable "s3_arn" {
+  description = "The S3 bucket arn created by the s3 module"
+  type = string
+}

@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "profile_generator_lambda_event_rule" {
   name = "profile-generator-lambda-event-rule"
   description = "retry scheduled every 2 min"
-  schedule_expression = "rate(240 minutes)"
+  schedule_expression = "rate(60 minutes)"
 }
 
 resource "aws_cloudwatch_event_target" "profile_generator_lambda_target" {

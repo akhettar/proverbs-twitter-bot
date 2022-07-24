@@ -91,7 +91,7 @@ resource "aws_iam_policy" "lambda_policy" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:s3:::english-proverbs-cirta/*"
+        "${var.s3_arn}/*"
       ]
     }
   ]
@@ -109,5 +109,5 @@ resource "aws_lambda_permission" "allow_terraform_bucket" {
    action = "lambda:InvokeFunction"
    function_name = "${aws_lambda_function.twitter_bot_func.arn}"
    principal = "s3.amazonaws.com"
-   source_arn = "arn:aws:s3:::english-proverbs-cirta"
+   source_arn = "${var.s3_arn}"
 }

@@ -1,5 +1,5 @@
 variable "bucket_name" {
-    default = "english-proverbs-cirta"
+    default = "en-proverbs-cirta"
 }
 
 variable "acl_value" {

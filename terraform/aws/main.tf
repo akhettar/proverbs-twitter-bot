@@ -1,11 +1,10 @@
 provider "aws" {
     profile =                 "${var.profile}"
-    shared_credentials_file = "~/.aws/credentials"
 }
 
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-state-cirta"
+  bucket = "terraform-state-cirta-1"
   # Enable versioning so we can see the full revision history of our
   # state files
   versioning {
@@ -21,12 +20,12 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
-module "s3" {
+module "s3_bucket" {
     source = "./s3"
-    #bucket name should be unique
-    bucket_name = "english-proverbs-cirta"       
+    bucket_name = "eng-proverbs-cirta"       
 }
 
 module "twitter-bot" {
   source = "./lambda"
+  s3_arn = module.s3_bucket.bucket_arn
 }
