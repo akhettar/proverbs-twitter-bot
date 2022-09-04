@@ -1,9 +1,9 @@
 variable "bucket_name" {
-    default = "en-proverbs-cirta"
+  default = "en-proverbs-cirta"
 }
 
 variable "acl_value" {
-    default = "private"
+  default = "private"
 }
 
 
@@ -14,5 +14,5 @@ variable "aws_secret_key" {
 default = “<your_secret_key>”
  } */
 variable "region" {
-    default  = "eu-central-1"
+  default = "eu-central-1"
 }

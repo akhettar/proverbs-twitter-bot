@@ -23,12 +23,12 @@ resource "aws_lambda_function" "twitter_bot_func" {
 
   environment {
     variables = {
-      BUCKET_NAME = "english-proverbs-cirta",
-      FILE_NAME = "proverbs.txt",
-      TWITTER_CONSUMER_KEY = "o37I7QrJe6Jf7DqRuT7hHeuCo",
+      BUCKET_NAME             = "english-proverbs-cirta",
+      FILE_NAME               = "proverbs.txt",
+      TWITTER_CONSUMER_KEY    = "o37I7QrJe6Jf7DqRuT7hHeuCo",
       TWITTER_CONSUMER_SECRET = "1HglkuCH30gceeSPGiFeSS4j5m3WGkUEeE92P09eN2tnUAJxKU",
-      TWITTER_ACCESS_TOKEN = "1508039357898317828-CI5Mj4vMp9i21qy5FsXQCxrU5fmBjP",
-      TWITTER_ACCESS_SECRET = "mgoyZI5MLoijqGNyBEgOpNkj9zekD9EU2SO1jJZs0rh6R"
+      TWITTER_ACCESS_TOKEN    = "1508039357898317828-CI5Mj4vMp9i21qy5FsXQCxrU5fmBjP",
+      TWITTER_ACCESS_SECRET   = "mgoyZI5MLoijqGNyBEgOpNkj9zekD9EU2SO1jJZs0rh6R"
     }
   }
 }
@@ -100,14 +100,14 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "terraform_lambda_iam_policy_basic_execution" {
- role = "${aws_iam_role.lambda_exec.id}"
- policy_arn = "${aws_iam_policy.lambda_policy.arn}"
+  role       = aws_iam_role.lambda_exec.id
+  policy_arn = aws_iam_policy.lambda_policy.arn
 }
 
 resource "aws_lambda_permission" "allow_terraform_bucket" {
-   statement_id = "AllowExecutionFromS3Bucket"
-   action = "lambda:InvokeFunction"
-   function_name = "${aws_lambda_function.twitter_bot_func.arn}"
-   principal = "s3.amazonaws.com"
-   source_arn = "${var.s3_arn}"
+  statement_id  = "AllowExecutionFromS3Bucket"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.twitter_bot_func.arn
+  principal     = "s3.amazonaws.com"
+  source_arn    = var.s3_arn
 }
