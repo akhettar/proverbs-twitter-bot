@@ -40,7 +40,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.9
+          terraform_version: 1.0.9 
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -52,8 +52,12 @@ jobs:
       - name: Initialize Terraform
         run: |
           cd terraform/${{ matrix.path }}
-          terraform init -input=false          
+          terraform init -input=false 
 
+      - name: Build the app binary
+        run:
+          go build -o bin/app    
+      
       - name: Plan Terraform
         id: plan
         continue-on-error: true
